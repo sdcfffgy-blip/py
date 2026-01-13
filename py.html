@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 代码总集（暴力复制版）</title>
+    <style>
+        body {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background-color: #f0f2f5;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px; /* 底部留白给按钮栏 */
+        }
+
+        h1 {
+            text-align: center;
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .instruction {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-family: system-ui, sans-serif;
+            font-size: 14px;
+        }
+
+        .content-display {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            white-space: pre-wrap;
+            word-break: break-all;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            line-height: 1.5;
+            user-select: text; /* 允许用户手动选择 */
+        }
+
+        /* 底部按钮栏 */
+        .action-bar {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s, opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+        }
+
+        /* 强力复制按钮 */
+        .btn-copy {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-copy:hover { background-color: #0056b3; }
+
+        /* 全选备用按钮 */
+        .btn-select {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-select:hover { background-color: #5a6268; }
+
+        /* 提示框 */
+        .toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 12px;
+            position: fixed;
+            z-index: 2000;
+            left: 50%;
+            bottom: 100px;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-family: system-ui, sans-serif;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Python 代码汇总</h1>
+    <p class="instruction">提示：如果点击蓝色按钮后无法粘贴，请尝试点击灰色按钮全选，然后按 Ctrl+C</p>
+
+    <div class="content-display" id="fullContent">优异生查询
+class Student:
+    def __init__(self, name, shuxue,yvwen,yingyv):
+        self.name = name
+        self.shuxue = int(shuxue)
+        self.yvwen = int(yvwen)
+        self.yingyv = int(yingyv)
+    def getSum(self):
+        return self.shuxue + self.yvwen + self.yingyv
+    def getBest(self):
+        return self.name,self.shuxue,self.yvwen,self.yingyv
+names = input().split()
+sxl = input().split()
+ywl = input().split()
+yyl = input().split()
+zgcj = 0
+bestxues = None
+for i in range(len(names)):
+    s = Student(names[i],sxl[i],ywl[i],yyl[i])
+    xzcj = s.getSum()
+    if xzcj > zgcj:
+        zgcj = xzcj
+        bestxues = s
+res = bestxues.getBest()
+print(res[0],res[1],res[2],res[3])
+三维向量运算
+class Vector3:
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+    def __add__(self, other):
+        return Vector3(self.x+other.x, self.y+other.y, self.z+other.z)
+    def __sub__(self, other):
+        return Vector3(self.x-other.x, self.y-other.y, self.z-other.z)
+    def __mul__(self, scalar):
+        return Vector3(self.x*scalar, self.y*scalar, self.z*scalar)
+    def __truediv__(self, scalar):
+        return Vector3(self.x/scalar, self.y/scalar, self.z/scalar)
+    def __floordiv__(self, scalar):
+        return Vector3(self.x//scalar, self.y//scalar, self.z//scalar)
+    def add(self, other):
+        return self + other
+    def show(self):
+        print(f"({self.x}, {self.y}, {self.z})")
+def main():
+    v1 = Vector3(1,2,3)
+    v2 = Vector3(3,4,5)
+    v3 = v1+v2    #观察点1
+    v3.show()
+    v3=v1.add(v2) #观察点2,为何等价
+继承类应用
+class Square:
+    def __init__(self, e): self.__e = e # 构造函数
+    def getEdge(self): return self.__e  # Get方法
+    def setEdge(self, e): self.__e = e  # Set方法
+    def Circumference(self): return 4 * self.__e
+    def Area(self): return self.__e**2
+class Cube(Square):
+    # 子类可以省略 __init__，它会自动使用父类的
+    def Area(self): return 6 * self.getEdge()**2
+    def Volumn(self): return self.getEdge()**3 # 注意题目拼写是 Volumn
+def main():
+    x = int(input())
+    s, c = Square(x), Cube(x)
+    print(f"边长为{x}的正方形,面积= {s.Area()}")
+    print(f"边长为{x}的正方形,周长= {s.Circumference()}")
+    print(f"边长为{x}的立方体,面积= {c.Area()}")
+    print(f"边长为{x}的立方体,体积= {c.Volumn()}")
+main()
+生日悖论
+import random
+x,n = map(int,input().split())
+random.seed(x)
+cf = 0
+for i in range(n):
+    sr = []
+    for j in range(23):
+        sr.append(random.randint(1,365))
+    if len(set(sr)) < 23:
+        cf = cf + 1
+print(f'rate={cf / n:.2f}')
+漂亮的螺旋
+n = int(input())
+matrix = [[0] * n for _ in range(n)]
+row, col = n // 2 - 1, n // 2
+# 填入起点
+matrix[row][col] = 1
+num = 2
+step = 1
+d_idx = 0 
+# 方向向量：左(0,-1), 下(1,0), 右(0,1), 上(-1,0)
+dirs = [(0, -1), (1, 0), (0, 1), (-1, 0)] 
+while num <= n * n:
+    # 每次按当前方向走 step 步
+    for _ in range(step):
+        if num > n * n: break
+        row += dirs[d_idx][0]
+        col += dirs[d_idx][1]
+        matrix[row][col] = num
+        num += 1
+    d_idx = (d_idx + 1) % 4
+    # 每走完两个方向（"左+下" 或 "右+上"），步长 +1
+    if d_idx % 2 == 0:
+        step += 1
+# 输出矩阵：每行合并成字符串，并去除末尾多余空格
+for row in matrix:
+    print("".join(f"{x:<4}" for x in row).rstrip())
+斐波那契数列
+T = int(input())
+for i in range(T):
+    n = int(input())
+    a = 1
+    b = 1
+    for i in range(3, n + 1):
+        c = a + b
+        a = b
+        b = c
+    print(b)
+计算各对应位乘积之和
+a,b = input().split()
+a = a.lstrip('-')
+b = b.lstrip('-')
+if len(a) < len(b):
+    a,b=b,a
+diff = len(a) - len(b)
+s = diff * "0" + b
+he = 0
+for i in range(len(a)):
+    cj = int(a[i]) * int(s[i])
+    he = he +cj
+print(he)
+重复元素判定
+def pdcf(a):
+    if len(a) > len(set(a)):
+        return True
+    else:
+        return False
+cfh = 0
+bcfh = 0
+n = int(input())
+for i in range(n):
+    s = input().split()
+    if pdcf(s):
+        cfh = cfh + 1
+    else:
+        bcfh = bcfh + 1
+print(f'True={cfh}, False={bcfh}')
+谁最轻谁最大--多分支
+p1 = [input(),int(input()),float(input())]
+p2 = [input(),int(input()),float(input())]
+p3 = [input(),int(input()),float(input())]
+p = [p1,p2,p3]
+maxage = max(p,key = lambda x:x[1])
+minweight = min(p,key = lambda x:x[2])
+print(f'{maxage[0]}年龄最大有{maxage[1]}岁。')
+print(f'{minweight[0]}体重最轻有{minweight[2]:.2f}公斤。')
+计算正确率
+l1 = eval(input())
+l2 = eval(input())
+c = 0
+for i in range(len(l1)):
+    if l1[i] == l2[i]:
+        c = c + 1
+zql = (c / len(l1)) * 100
+print(f'{zql:.0f}%')
+最长的单词
+def qx(q):
+    a = ''
+    for i in q:
+        if i.isalpha():
+            a = a + i
+        else:
+            a = a + " "
+    return a.split()
+while True:
+    try:
+        s = qx(input())
+        print(max(s,key=len))
+    except:
+        break
+找成绩
+T = int(input())
+for i in range(T):
+    l1 = []
+    n,m,k = map(int,input().split())
+    for i in range(n):
+        l = list(map(int,input().split()))
+        l1.append(l)
+    l2 = sorted(l1,key = lambda x:-sum(x))
+    d = l2[k-1]
+    print(' '.join(map(str,d)))
+缩写期刊名
+T = int(input())
+for i in range(T):
+    l = []
+    n = input().split()
+    for i in n:
+        a = i.lower()
+        if len(a) > 4:
+            a = a[:4] + '.'
+            l.append(a)
+        else:
+            l.append(a)
+    print(' '.join(l))
+魔镜
+while True:
+    try:
+        s = input()
+        while len(s) % 2 == 0:
+            yb = len(s) // 2
+            lchar = s[:yb]
+            rchar = s[yb:]
+            if lchar == rchar[::-1]:
+                s = lchar
+            else:
+                break
+        print(len(s))
+    except:
+        break
+密码验证
+def cd(pwd):
+    if len(pwd) >= 8:
+        return True
+    else:
+        return False
+def dxzm(pwd):
+    for i in pwd:
+        if i.isupper():
+            return True
+    return False
+def sz(pwd):
+    for i in pwd:
+        if i.isdigit():
+            return True
+    return False
+while True:
+    a = input()
+    if a.upper() == 'Q':
+        break
+    else:
+        if cd(a) and dxzm(a) and sz(a):
+            print('密码设置成功')
+            break
+        else:
+            print('密码不符合要求，请重新输入')</div>
+
+    <div class="action-bar">
+        <button class="btn btn-select" onclick="selectAll()">📝 全选 (备用)</button>
+        <button class="btn btn-copy" onclick="robustCopy()">📋 强力复制</button>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // 1. 强力复制功能（使用更兼容的 textarea 方案）
+        function robustCopy() {
+            const content = document.getElementById('fullContent').innerText;
+            const textArea = document.createElement("textarea");
+            
+            // 将文本放入临时文本域
+            textArea.value = content;
+            
+            // 确保文本域在屏幕外，不可见，但存在于 DOM 中
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            
+            // 选中并复制
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if(successful) {
+                    showToast("已复制！如果粘贴失败请用左侧全选按钮");
+                } else {
+                    showToast("复制被浏览器拦截，请使用【全选】按钮");
+                }
+            } catch (err) {
+                console.error('无法复制', err);
+                showToast("复制出错，请手动复制");
+            }
+            
+            // 清理
+            document.body.removeChild(textArea);
+        }
+
+        // 2. 全选功能（最底层的备用方案）
+        function selectAll() {
+            const range = document.createRange();
+            range.selectNode(document.getElementById('fullContent'));
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            showToast("已全选，请按 Ctrl+C");
+        }
+
+        // 提示框逻辑
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = "toast"; }, 3000);
+        }
+    </script>
+</body>
+</html>
